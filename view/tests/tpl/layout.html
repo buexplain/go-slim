@@ -1,0 +1,32 @@
+<!--如果define的值是"extend"，则会被解析为继承模板，一个文件只能定义一个extend-->
+{{define "extend"}}
+    master/master.html
+{{end}}
+
+{{define "title"}}
+    {{if .user}}
+        edit {{.user.Account}}
+    {{else}}
+        create
+    {{end}}
+{{end}}
+
+{{define "css"}}
+    <!--template语法具备挖坑布局与引入文件的功能，当其值拼接上模板根目录时是一个文件的话，则会自动引入目标文件-->
+    {{template "layout.css.html"}}
+{{end}}
+
+{{define "content"}}
+    <form action="/{{if .user}}edit{{else}}create{{end}}" method="POST">
+        <input type="text" name="account" value="{{.user.Account}}">
+        <input type="text" name="password" value="{{.user.Password}}">
+        <!--这个template是挖坑布局-->
+        {{template "other" .}}
+        <button type="submit">提交</button>
+    </form>
+{{end}}
+
+{{define "js"}}
+    <!--这个template是引入公共的js文件-->
+    {{template "layout.js.html"}}
+{{end}}

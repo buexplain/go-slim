@@ -1,0 +1,21 @@
+{{define "extend"}}
+    layout.html
+{{end}}
+
+{{define "css"}}
+    {{template "layout.css.html"}}
+    <style>
+        body {
+            background: red;
+        }
+    </style>
+{{end}}
+
+{{define "other"}}
+    <input type="hidden" name="id" value="{{.result.ID}}">
+{{end}}
+
+{{define "js"}}
+    {{template "layout.js.html"}}
+    <script>alert("编辑");</script>
+{{end}}
